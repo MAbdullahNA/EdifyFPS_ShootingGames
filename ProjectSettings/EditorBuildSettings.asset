@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Demos/Scenes/EnvDemo.unity
+    guid: 3ae472aa62ae6154f96e6c0390a79942
+  - enabled: 1
+    path: Assets/Demos/FPS_Controller/Scenes/FPS_ControllerDemo.unity
+    guid: 1d1c881fc65c93e40b31bd3a74b2c767
+  - enabled: 1
+    path: Assets/Demos/3D_CharacterAnimation/Scenes/CharacterAnimation.unity
+    guid: c9f82de16f5946047b945937b4e714a8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
