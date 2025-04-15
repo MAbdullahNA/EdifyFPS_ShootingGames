@@ -5,6 +5,7 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerAction
 {
     public PlayerControls _playerControls;
     public Vector2 moveInput;
+    public Vector2 lookInput;
 
     private void OnEnable()
     {
@@ -28,7 +29,7 @@ public class PlayerLocomotionInput : MonoBehaviour, PlayerControls.IPlayerAction
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        //throw new System.NotImplementedException();
+        lookInput = context.ReadValue<Vector2>();
     }
 
     public void OnAttack(InputAction.CallbackContext context)
