@@ -6,13 +6,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerLocomotionInput _PlayerLocomotionInput;
     [SerializeField] private Camera _Camera;
 
-    public float runAcceleration;
-    public float runSpeed;
-    public float drag;
+    public float runAcceleration = 10f;
+    public float runSpeed = 3f;
+    public float drag = 0.2f;
 
-    public float lookSenseH;
-    public float lookSenseV;
-    public float lookLimitV;
+    public float lookSenseH = 0.1f;
+    public float lookSenseV = 0.1f;
+    public float lookLimitV = 89f;
 
     private Vector2 cameraRotation = Vector2.zero;
     private Vector2 playerTargetRotaion = Vector2.zero;
