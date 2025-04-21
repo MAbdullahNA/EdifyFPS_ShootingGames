@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 cameraRotation = Vector2.zero;
     private Vector2 playerTargetRotaion = Vector2.zero;
 
+
     // Update is called once per frame
     void Update()
     {
@@ -27,8 +28,8 @@ public class PlayerController : MonoBehaviour
         Vector3 movementDelta = moveDirection * runAcceleration * Time.deltaTime;// add acceleration
         Vector3 newVelocity = _CharacterController.velocity + movementDelta;// add velocity to current velocity of character
 
-        Vector3 currentDrag = newVelocity.normalized * drag;
-        if(newVelocity.magnitude > drag)
+        Vector3 currentDrag = newVelocity.normalized * drag * Time.deltaTime;
+        if (newVelocity.magnitude > drag * Time.deltaTime)
         {
             newVelocity = newVelocity - currentDrag;
         }
