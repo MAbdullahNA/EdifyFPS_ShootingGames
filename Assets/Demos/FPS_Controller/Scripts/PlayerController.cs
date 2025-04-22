@@ -4,11 +4,14 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CharacterController _CharacterController;
     [SerializeField] private PlayerLocomotionInput _PlayerLocomotionInput;
+    [SerializeField] private PlayerState _PlayerState;
+
     [SerializeField] private Camera _Camera;
 
     public float runAcceleration = 10f;
     public float runSpeed = 3f;
     public float drag = 0.2f;
+    public float moveThreshold = 0.1f;
 
     public float lookSenseH = 0.1f;
     public float lookSenseV = 0.1f;
@@ -17,9 +20,38 @@ public class PlayerController : MonoBehaviour
     private Vector2 cameraRotation = Vector2.zero;
     private Vector2 playerTargetRotaion = Vector2.zero;
 
+    public bool isMovementInput;
+    public bool isPlayerMoving;
 
+    private void Awake()
+    {
+        _CharacterController = GetComponent<CharacterController>();
+        _PlayerLocomotionInput = GetComponent<PlayerLocomotionInput>();
+        _PlayerState = GetComponent<PlayerState>();
+    }
     // Update is called once per frame
     void Update()
+    {
+        UpdatePLayerState();
+        HandlePlayerMovement();
+    }
+    private void UpdatePLayerState()
+    {
+        isMovementInput = _PlayerLocomotionInput.moveInput != Vector2.zero;
+        isPlayerMoving = IsPlayerMoving();
+        PlayerMovementState playerState = (isMovementInput || isPlayerMoving) ? PlayerMovementState.Running : PlayerMovementState.Idle;
+        _PlayerState.UpdatePlayerState(playerState);
+
+        /*if (isMovementInput || isPlayerMoving)
+        {
+            playerState = PlayerMovementState.Running;
+        }
+        else
+        {
+            playerState = PlayerMovementState.Idle;
+        }*/
+    }
+    private void HandlePlayerMovement()
     {
         Vector3 cameraForwardXZ = new Vector3(_Camera.transform.forward.x, 0, _Camera.transform.forward.z).normalized;// save the previous camera forward position
         Vector3 cameraRightXZ = new Vector3(_Camera.transform.right.x, 0, _Camera.transform.right.z).normalized;// save the previous camera horizontal/right position
@@ -50,5 +82,11 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, playerTargetRotaion.x, 0f);
 
         _Camera.transform.rotation = Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0f);
+    }
+    //
+    private bool IsPlayerMoving()
+    {
+        Vector3 playerVelocity = new Vector3(_CharacterController.velocity.x, 0, _CharacterController.velocity.z);
+        return playerVelocity.magnitude > moveThreshold;
     }
 }
