@@ -3,10 +3,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CharacterController _CharacterController;
+    [SerializeField] private Camera _Camera;
+
     [SerializeField] private PlayerLocomotionInput _PlayerLocomotionInput;
     [SerializeField] private PlayerState _PlayerState;
 
-    [SerializeField] private Camera _Camera;
 
     public float runAcceleration = 10f;
     public float runSpeed = 3f;
