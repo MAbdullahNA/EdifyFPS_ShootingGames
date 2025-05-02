@@ -12,9 +12,18 @@ public class HealthManager : MonoBehaviour
     public void UpdateHealth(float value)
     {
         health += value;
-        if(health <= 0)
+
+        if (health <= 0)
         {
-            Destroy(gameObject);
+            if (GetComponent<Animator>())
+            {
+                GetComponent<Animator>().enabled = false;
+                Destroy(gameObject,3);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
